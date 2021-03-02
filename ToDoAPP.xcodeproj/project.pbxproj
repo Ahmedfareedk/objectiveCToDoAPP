@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8891FE0F25EE9D1100674389 /* ColorUtilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8891FE0E25EE9D1100674389 /* ColorUtilViewController.m */; };
+		8891FE1425EEA28300674389 /* AlertsUtilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8891FE1325EEA28300674389 /* AlertsUtilViewController.m */; };
+		88C7CBFC25ED80F2005ED198 /* InProgressTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C7CBFB25ED80F2005ED198 /* InProgressTableTableViewController.m */; };
 		88D84F5F25EB95E5000FBE00 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D84F5E25EB95E5000FBE00 /* AppDelegate.m */; };
 		88D84F6225EB95E5000FBE00 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D84F6125EB95E5000FBE00 /* SceneDelegate.m */; };
 		88D84F6525EB95E5000FBE00 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D84F6425EB95E5000FBE00 /* ViewController.m */; };
@@ -14,9 +17,20 @@
 		88D84F6A25EB95E6000FBE00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88D84F6925EB95E6000FBE00 /* Assets.xcassets */; };
 		88D84F6D25EB95E6000FBE00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88D84F6B25EB95E6000FBE00 /* LaunchScreen.storyboard */; };
 		88D84F7025EB95E6000FBE00 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D84F6F25EB95E6000FBE00 /* main.m */; };
+		88D84F7925EB99CC000FBE00 /* TaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D84F7825EB99CC000FBE00 /* TaskTableViewCell.m */; };
+		88D84F7E25EB9D46000FBE00 /* TaskContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D84F7D25EB9D46000FBE00 /* TaskContentViewController.m */; };
+		88D84F8225EBA34F000FBE00 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D84F8125EBA34F000FBE00 /* Task.m */; };
+		88D84F8925EBAA97000FBE00 /* TaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D84F8825EBAA97000FBE00 /* TaskTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8891FE0D25EE9D1100674389 /* ColorUtilViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorUtilViewController.h; sourceTree = "<group>"; };
+		8891FE0E25EE9D1100674389 /* ColorUtilViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorUtilViewController.m; sourceTree = "<group>"; };
+		8891FE1225EEA28300674389 /* AlertsUtilViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertsUtilViewController.h; sourceTree = "<group>"; };
+		8891FE1325EEA28300674389 /* AlertsUtilViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertsUtilViewController.m; sourceTree = "<group>"; };
+		88C7CBF425ED7D44005ED198 /* onAddToProgress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = onAddToProgress.h; sourceTree = "<group>"; };
+		88C7CBFA25ED80F2005ED198 /* InProgressTableTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InProgressTableTableViewController.h; sourceTree = "<group>"; };
+		88C7CBFB25ED80F2005ED198 /* InProgressTableTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InProgressTableTableViewController.m; sourceTree = "<group>"; };
 		88D84F5A25EB95E5000FBE00 /* ToDoAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D84F5D25EB95E5000FBE00 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		88D84F5E25EB95E5000FBE00 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -29,6 +43,15 @@
 		88D84F6C25EB95E6000FBE00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88D84F6E25EB95E6000FBE00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88D84F6F25EB95E6000FBE00 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		88D84F7725EB99CC000FBE00 /* TaskTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskTableViewCell.h; sourceTree = "<group>"; };
+		88D84F7825EB99CC000FBE00 /* TaskTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskTableViewCell.m; sourceTree = "<group>"; };
+		88D84F7C25EB9D46000FBE00 /* TaskContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskContentViewController.h; sourceTree = "<group>"; };
+		88D84F7D25EB9D46000FBE00 /* TaskContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskContentViewController.m; sourceTree = "<group>"; };
+		88D84F8025EBA34F000FBE00 /* Task.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		88D84F8125EBA34F000FBE00 /* Task.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		88D84F8425EBA8D8000FBE00 /* TaskProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskProtocol.h; sourceTree = "<group>"; };
+		88D84F8725EBAA97000FBE00 /* TaskTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskTableViewController.h; sourceTree = "<group>"; };
+		88D84F8825EBAA97000FBE00 /* TaskTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +65,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8891FE0C25EE9CDF00674389 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				8891FE0D25EE9D1100674389 /* ColorUtilViewController.h */,
+				8891FE0E25EE9D1100674389 /* ColorUtilViewController.m */,
+				8891FE1225EEA28300674389 /* AlertsUtilViewController.h */,
+				8891FE1325EEA28300674389 /* AlertsUtilViewController.m */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		8891FE1725EEA74000674389 /* Custom Cell */ = {
+			isa = PBXGroup;
+			children = (
+				88D84F7725EB99CC000FBE00 /* TaskTableViewCell.h */,
+				88D84F7825EB99CC000FBE00 /* TaskTableViewCell.m */,
+			);
+			path = "Custom Cell";
+			sourceTree = "<group>";
+		};
+		8891FE1825EEA77A00674389 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				88D84F8025EBA34F000FBE00 /* Task.h */,
+				88D84F8125EBA34F000FBE00 /* Task.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		8891FE1925EEA79100674389 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				88D84F7C25EB9D46000FBE00 /* TaskContentViewController.h */,
+				88D84F7D25EB9D46000FBE00 /* TaskContentViewController.m */,
+				88D84F8725EBAA97000FBE00 /* TaskTableViewController.h */,
+				88D84F8825EBAA97000FBE00 /* TaskTableViewController.m */,
+				88C7CBFA25ED80F2005ED198 /* InProgressTableTableViewController.h */,
+				88C7CBFB25ED80F2005ED198 /* InProgressTableTableViewController.m */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		88C7CBF325ED7D12005ED198 /* protocoles */ = {
+			isa = PBXGroup;
+			children = (
+				88D84F8425EBA8D8000FBE00 /* TaskProtocol.h */,
+				88C7CBF425ED7D44005ED198 /* onAddToProgress.h */,
+			);
+			path = protocoles;
+			sourceTree = "<group>";
+		};
 		88D84F5125EB95E5000FBE00 = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +135,11 @@
 		88D84F5C25EB95E5000FBE00 /* ToDoAPP */ = {
 			isa = PBXGroup;
 			children = (
+				8891FE1925EEA79100674389 /* controllers */,
+				8891FE1825EEA77A00674389 /* model */,
+				8891FE1725EEA74000674389 /* Custom Cell */,
+				8891FE0C25EE9CDF00674389 /* utils */,
+				88C7CBF325ED7D12005ED198 /* protocoles */,
 				88D84F5D25EB95E5000FBE00 /* AppDelegate.h */,
 				88D84F5E25EB95E5000FBE00 /* AppDelegate.m */,
 				88D84F6025EB95E5000FBE00 /* SceneDelegate.h */,
@@ -145,10 +224,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88D84F8225EBA34F000FBE00 /* Task.m in Sources */,
+				8891FE0F25EE9D1100674389 /* ColorUtilViewController.m in Sources */,
 				88D84F6525EB95E5000FBE00 /* ViewController.m in Sources */,
 				88D84F5F25EB95E5000FBE00 /* AppDelegate.m in Sources */,
+				88D84F7925EB99CC000FBE00 /* TaskTableViewCell.m in Sources */,
 				88D84F7025EB95E6000FBE00 /* main.m in Sources */,
 				88D84F6225EB95E5000FBE00 /* SceneDelegate.m in Sources */,
+				88D84F8925EBAA97000FBE00 /* TaskTableViewController.m in Sources */,
+				8891FE1425EEA28300674389 /* AlertsUtilViewController.m in Sources */,
+				88D84F7E25EB9D46000FBE00 /* TaskContentViewController.m in Sources */,
+				88C7CBFC25ED80F2005ED198 /* InProgressTableTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
