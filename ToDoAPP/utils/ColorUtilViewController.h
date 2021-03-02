@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(UIColor*)highColor;
 +(UIColor*)mediumColor;
 +(UIColor*)lowColor;
++(void)setCellColor:(NSString*)periorityValue cell :(UITableViewCell*)cell;
 
 @end
 

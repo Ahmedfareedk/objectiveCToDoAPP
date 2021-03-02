@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TaskTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *inProgressBtn;
-@property id <OnAddToProgress> addTaskToInProgress;
+@property id <OnAddToProgress> passTask;
 @property NSIndexPath* indexPath;
 
 
@@ -26,6 +26,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *progressDesc;
 @property (weak, nonatomic) IBOutlet UILabel *progressDate;
 @property (weak, nonatomic) IBOutlet UIButton *addToDoneBtn;
+
+
+//Done Tasks Components
+@property (weak, nonatomic) IBOutlet UILabel *doneTaskTitle;
+@property (weak, nonatomic) IBOutlet UILabel *doneTaskDesc;
+@property (weak, nonatomic) IBOutlet UILabel *doneTaskDate;
 
 @end
 

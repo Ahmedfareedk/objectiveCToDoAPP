@@ -14,6 +14,7 @@
     // Initialization code
     
     _inProgressBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 4, 0, 4);
+    _addToDoneBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 4, 0, 4);
   
 }
 
@@ -24,10 +25,11 @@
 }
 
 - (IBAction)addToInProgress:(id)sender {
-    [_addTaskToInProgress passTaskIndexPath:_indexPath];
+    [_passTask passTaskIndexPath:_indexPath];
 }
 
 - (IBAction)addToDone:(id)sender {
+    [_passTask passTaskIndexPath:_indexPath];
 }
 
 @end

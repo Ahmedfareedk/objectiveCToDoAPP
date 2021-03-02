@@ -7,11 +7,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Task.h"
+#import "OnAddToProgress.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface InProgressTableTableViewController : UITableViewController
+@interface InProgressTableTableViewController : UITableViewController<OnAddToProgress>
 
-@property Task *task;
 @property NSMutableArray<Task*> *inprog;
 @end
 
