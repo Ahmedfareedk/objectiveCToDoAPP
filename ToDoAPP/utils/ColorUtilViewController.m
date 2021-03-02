@@ -41,6 +41,19 @@
                             blue:0x0f/255.0f alpha:1];
 }
 
++(void)setCellColor:(NSString*)periorityValue cell :(UITableViewCell*)cell{
+   
+    
+    if([periorityValue isEqual:@"High"]){
+        cell.backgroundColor = [ColorUtilViewController highColor];
+        
+    }else if ([periorityValue isEqual:@"Medium"]){
+        cell.backgroundColor = [ColorUtilViewController mediumColor];
+        
+    }else{
+        cell.backgroundColor = [ColorUtilViewController lowColor];
+    }
+}
 
 
 /*

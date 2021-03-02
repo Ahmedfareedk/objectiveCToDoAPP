@@ -1,90 +1,75 @@
 //
-//  InProgressTableTableViewController.m
+//  DoneTasksTableViewController.m
 //  ToDoAPP
 //
-//  Created by AhmedFareed on 02/03/2021.
+//  Created by AhmedFareed on 03/03/2021.
 //
 
-#import "InProgressTableTableViewController.h"
+#import "DoneTasksTableViewController.h"
+#import "Task.h"
 #import "TaskTableViewCell.h"
 #import "ColorUtilViewController.h"
-#import "AlertsUtilViewController.h"
-
-
-@interface InProgressTableTableViewController ()
+@interface DoneTasksTableViewController ()
 
 @end
 
-@implementation InProgressTableTableViewController
+@implementation DoneTasksTableViewController
 {
-  
-   
+    NSMutableArray<Task*> *doneTasks;
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    printf("\nDid Load");
-    _inprog = [NSMutableArray new];
-   
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveModel:) name:@"sharingTheModel" object:nil];
+    doneTasks = [NSMutableArray new];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveDoneTasks:) name:@"addToDone" object:nil];
+    
     
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [self.tableView reloadData];
+-(void) recieveDoneTasks : (NSNotification*)notification{
+    if(notification.userInfo != NULL)
+    {
+        NSDictionary* taskDict = notification.userInfo;
+        [doneTasks addObject:[taskDict objectForKey:@"done_task"]];
+    }
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //return todo.inProgressTasks.count;
-    return _inprog.count;
+    return doneTasks.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"progress" forIndexPath:indexPath];
+    TaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"done" forIndexPath:indexPath];
+    
+   cell.doneTaskTitle.text =[[doneTasks objectAtIndex:indexPath.row]taskTitle];
+    cell.doneTaskDesc.text =[[doneTasks objectAtIndex:indexPath.row]taskDesc];
+    cell.doneTaskDate.text =[[doneTasks objectAtIndex:indexPath.row]taskDate];
 
-    cell.progressTitle.text = [[_inprog objectAtIndex:indexPath.row]taskTitle];
-    cell.progressDesc.text = [[_inprog objectAtIndex:indexPath.row]taskDesc];
-    cell.progressDate.text = [[_inprog objectAtIndex:indexPath.row]taskDate];
-   
-    [cell setPassTask:self];
-    [cell setIndexPath:indexPath];
+    NSString *periorityValue =[[doneTasks objectAtIndex:indexPath.row]taskPeriority];
     
-    
-    NSString *periorityValue =[[_inprog objectAtIndex:indexPath.row]taskPeriority] ;
     
     [ColorUtilViewController setCellColor:periorityValue cell:cell];
+    
     return cell;
 }
 
--(void) recieveModel:(NSNotification*)notification{
-    if(notification.userInfo != NULL){
-    NSDictionary *taskDict = notification.userInfo;
-    [_inprog addObject:[taskDict objectForKey:@"task"]];
-    }
-}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return 120;
+    return 140;
 }
 
--(void)passTaskIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *taskDict = [NSDictionary dictionaryWithObject:[_inprog objectAtIndex:indexPath.row] forKey:@"done_task"];
+- (void)viewWillAppear:(BOOL)animated{
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"addToDone" object:nil userInfo:taskDict];
+    NSLog(@"done size %ld", (long)doneTasks.count);
     
-    [_inprog removeObject:[_inprog objectAtIndex:indexPath.row]];
     [self.tableView reloadData];
-
-    [AlertsUtilViewController showToast:@"Added To in Done" viewController:self];
 }
 /*
 // Override to support conditional editing of the table view.
@@ -129,6 +114,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
 
 @end

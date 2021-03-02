@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8891FE0F25EE9D1100674389 /* ColorUtilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8891FE0E25EE9D1100674389 /* ColorUtilViewController.m */; };
 		8891FE1425EEA28300674389 /* AlertsUtilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8891FE1325EEA28300674389 /* AlertsUtilViewController.m */; };
+		8891FE1E25EEDCB900674389 /* DoneTasksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8891FE1D25EEDCB900674389 /* DoneTasksTableViewController.m */; };
 		88C7CBFC25ED80F2005ED198 /* InProgressTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C7CBFB25ED80F2005ED198 /* InProgressTableTableViewController.m */; };
 		88D84F5F25EB95E5000FBE00 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D84F5E25EB95E5000FBE00 /* AppDelegate.m */; };
 		88D84F6225EB95E5000FBE00 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D84F6125EB95E5000FBE00 /* SceneDelegate.m */; };
@@ -28,6 +29,8 @@
 		8891FE0E25EE9D1100674389 /* ColorUtilViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorUtilViewController.m; sourceTree = "<group>"; };
 		8891FE1225EEA28300674389 /* AlertsUtilViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertsUtilViewController.h; sourceTree = "<group>"; };
 		8891FE1325EEA28300674389 /* AlertsUtilViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertsUtilViewController.m; sourceTree = "<group>"; };
+		8891FE1C25EEDCB900674389 /* DoneTasksTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoneTasksTableViewController.h; sourceTree = "<group>"; };
+		8891FE1D25EEDCB900674389 /* DoneTasksTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoneTasksTableViewController.m; sourceTree = "<group>"; };
 		88C7CBF425ED7D44005ED198 /* onAddToProgress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = onAddToProgress.h; sourceTree = "<group>"; };
 		88C7CBFA25ED80F2005ED198 /* InProgressTableTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InProgressTableTableViewController.h; sourceTree = "<group>"; };
 		88C7CBFB25ED80F2005ED198 /* InProgressTableTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InProgressTableTableViewController.m; sourceTree = "<group>"; };
@@ -103,6 +106,8 @@
 				88D84F8825EBAA97000FBE00 /* TaskTableViewController.m */,
 				88C7CBFA25ED80F2005ED198 /* InProgressTableTableViewController.h */,
 				88C7CBFB25ED80F2005ED198 /* InProgressTableTableViewController.m */,
+				8891FE1C25EEDCB900674389 /* DoneTasksTableViewController.h */,
+				8891FE1D25EEDCB900674389 /* DoneTasksTableViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8891FE1E25EEDCB900674389 /* DoneTasksTableViewController.m in Sources */,
 				88D84F8225EBA34F000FBE00 /* Task.m in Sources */,
 				8891FE0F25EE9D1100674389 /* ColorUtilViewController.m in Sources */,
 				88D84F6525EB95E5000FBE00 /* ViewController.m in Sources */,

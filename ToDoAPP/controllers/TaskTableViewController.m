@@ -13,7 +13,6 @@
 #import "ColorUtilViewController.h"
 #import "AlertsUtilViewController.h"
 
-
 @interface TaskTableViewController ()
 
 @end
@@ -39,7 +38,7 @@
     TaskTableViewCell *taskCell = [tableView dequeueReusableCellWithIdentifier:@"task" forIndexPath:indexPath];
     taskCell.inProgressBtn.layer.cornerRadius = 8.0;
    
-    [taskCell setAddTaskToInProgress:self];
+    [taskCell setPassTask:self];
     [taskCell setIndexPath:indexPath];
     
     taskCell.taskTitle.text = [[tasks objectAtIndex:indexPath.row]taskTitle];
@@ -47,16 +46,7 @@
     taskCell.taskDate.text = [[tasks objectAtIndex:indexPath.row]taskDate];
     
     NSString *periorityValue =[[tasks objectAtIndex:indexPath.row]taskPeriority] ;
-    
-    if([periorityValue isEqual:@"High"]){
-        taskCell.backgroundColor = [ColorUtilViewController highColor];
-        
-    }else if ([periorityValue isEqual:@"Medium"]){
-        taskCell.backgroundColor = [ColorUtilViewController mediumColor];
-        
-    }else{
-        taskCell.backgroundColor = [ColorUtilViewController lowColor];
-    }
+    [ColorUtilViewController setCellColor:periorityValue cell:taskCell];
     
     return taskCell;
 }
@@ -83,7 +73,7 @@
 
 -(void) add{
     
-    TaskContentViewController *taskContentView; = [self.storyboard instantiateViewControllerWithIdentifier:@"task_content"];
+    TaskContentViewController *taskContentView = [self.storyboard instantiateViewControllerWithIdentifier:@"task_content"];
     
     [taskContentView setOnTaskDone:self];
     
@@ -100,6 +90,7 @@
     NSDictionary *taskDict = [NSDictionary dictionaryWithObject:[tasks objectAtIndex:indexPath.row] forKey:@"task"];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"sharingTheModel" object:nil userInfo:taskDict];
+    
     [tasks removeObject:[tasks objectAtIndex:indexPath.row]];
     [_tableView reloadData];
 
