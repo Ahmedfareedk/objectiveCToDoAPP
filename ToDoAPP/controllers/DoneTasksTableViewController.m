@@ -9,6 +9,7 @@
 #import "Task.h"
 #import "TaskTableViewCell.h"
 #import "ColorUtilViewController.h"
+#import "ContentEditViewController.h"
 @interface DoneTasksTableViewController ()
 
 @end
@@ -75,6 +76,20 @@
     
     return cell;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    ContentEditViewController *editTaskController = [self.storyboard instantiateViewControllerWithIdentifier:@"edit_view"];
+    
+    [editTaskController setTaskDict:[self->doneTasks objectAtIndex:indexPath.row]];
+    
+    [editTaskController setIndexPath:indexPath];
+    [editTaskController setPassTaskDict:self];
+    
+    [self.navigationController presentViewController:editTaskController animated:YES completion:nil];
+    
+}
+
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 140;
@@ -109,6 +124,13 @@
     }   
 }
 
+- (void)onAddTaskDict:(NSDictionary *)taskDict indexPath:(NSIndexPath *)indexPath{
+    
+    [doneTasks replaceObjectAtIndex:indexPath.row withObject:taskDict];
+    [doneTaskPreferences setObject:doneTasks forKey:@"doneTasksPref"];
+    [doneTaskPreferences synchronize];
+    [self.tableView reloadData];
+}
 
 /*
 // Override to support rearranging the table view.

@@ -12,6 +12,7 @@
 #import "InProgressTableTableViewController.h"
 #import "ColorUtilViewController.h"
 #import "AlertsUtilViewController.h"
+#import "ContentEditViewController.h"
 
 @interface TaskTableViewController ()
 
@@ -59,6 +60,18 @@
    [ColorUtilViewController setCellColor:periorityValue cell:taskCell];
     
     return taskCell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    ContentEditViewController *editTaskController = [self.storyboard instantiateViewControllerWithIdentifier:@"edit_view"];
+    
+    [editTaskController setTaskDict:[self->tasksDictArray objectAtIndex:indexPath.row]];
+    
+    [editTaskController setIndexPath:indexPath];
+    [editTaskController setPassTaskDict:self];
+    
+    [self.navigationController presentViewController:editTaskController animated:YES completion:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -120,6 +133,15 @@
     [AlertsUtilViewController showToast:@"Added To in Progress" viewController:self];
 }
 
+
+
+- (void)onAddTaskDict:(NSDictionary *)taskDict indexPath:(NSIndexPath *)indexPath{
+    printf("Doooooone");
+    [tasksDictArray replaceObjectAtIndex:indexPath.row withObject:taskDict];
+    [taskPrefernces setObject:tasksDictArray forKey:@"taskDictPref"];
+    [taskPrefernces synchronize];
+    [_tableView reloadData];
+}
 
 
 @end

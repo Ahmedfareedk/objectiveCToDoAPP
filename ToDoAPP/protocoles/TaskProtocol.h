@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @required
 -(void)OnAddTask:(Task*)task;
+
+@required
+-(void)onAddTaskDict:(NSDictionary*)taskDict indexPath :(NSIndexPath*)indexPath;
 @end
 
 NS_ASSUME_NONNULL_END

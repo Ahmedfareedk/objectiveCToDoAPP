@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8811D66D25F001F200C472B7 /* ContentEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8811D66C25F001F200C472B7 /* ContentEditViewController.m */; };
 		8891FE0F25EE9D1100674389 /* ColorUtilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8891FE0E25EE9D1100674389 /* ColorUtilViewController.m */; };
 		8891FE1425EEA28300674389 /* AlertsUtilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8891FE1325EEA28300674389 /* AlertsUtilViewController.m */; };
 		8891FE1E25EEDCB900674389 /* DoneTasksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8891FE1D25EEDCB900674389 /* DoneTasksTableViewController.m */; };
@@ -25,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8811D66B25F001F200C472B7 /* ContentEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentEditViewController.h; sourceTree = "<group>"; };
+		8811D66C25F001F200C472B7 /* ContentEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentEditViewController.m; sourceTree = "<group>"; };
 		8891FE0D25EE9D1100674389 /* ColorUtilViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorUtilViewController.h; sourceTree = "<group>"; };
 		8891FE0E25EE9D1100674389 /* ColorUtilViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorUtilViewController.m; sourceTree = "<group>"; };
 		8891FE1225EEA28300674389 /* AlertsUtilViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertsUtilViewController.h; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 				88C7CBFB25ED80F2005ED198 /* InProgressTableTableViewController.m */,
 				8891FE1C25EEDCB900674389 /* DoneTasksTableViewController.h */,
 				8891FE1D25EEDCB900674389 /* DoneTasksTableViewController.m */,
+				8811D66B25F001F200C472B7 /* ContentEditViewController.h */,
+				8811D66C25F001F200C472B7 /* ContentEditViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 				88D84F6225EB95E5000FBE00 /* SceneDelegate.m in Sources */,
 				88D84F8925EBAA97000FBE00 /* TaskTableViewController.m in Sources */,
 				8891FE1425EEA28300674389 /* AlertsUtilViewController.m in Sources */,
+				8811D66D25F001F200C472B7 /* ContentEditViewController.m in Sources */,
 				88D84F7E25EB9D46000FBE00 /* TaskContentViewController.m in Sources */,
 				88C7CBFC25ED80F2005ED198 /* InProgressTableTableViewController.m in Sources */,
 			);

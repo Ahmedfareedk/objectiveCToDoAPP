@@ -9,6 +9,7 @@
 #import "TaskTableViewCell.h"
 #import "ColorUtilViewController.h"
 #import "AlertsUtilViewController.h"
+#import "ContentEditViewController.h"
 
 
 @interface InProgressTableTableViewController ()
@@ -76,6 +77,19 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    ContentEditViewController *editTaskController = [self.storyboard instantiateViewControllerWithIdentifier:@"edit_view"];
+    
+    [editTaskController setTaskDict:[self->_inprog objectAtIndex:indexPath.row]];
+    
+    [editTaskController setIndexPath:indexPath];
+    [editTaskController setPassTaskDict:self];
+    
+    [self.navigationController presentViewController:editTaskController animated:YES completion:nil];
+    
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -111,6 +125,15 @@
         [inProgPreferences synchronize];
     
 }
+
+- (void)onAddTaskDict:(NSDictionary *)taskDict indexPath:(NSIndexPath *)indexPath{
+    
+    [_inprog replaceObjectAtIndex:indexPath.row withObject:taskDict];
+    [inProgPreferences setObject:_inprog forKey:@"inProgTasks"];
+    [inProgPreferences synchronize];
+    [self.tableView reloadData];
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

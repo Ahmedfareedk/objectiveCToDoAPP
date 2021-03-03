@@ -6,10 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "onAddToProgress.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DoneTasksTableViewController : UITableViewController
+@interface DoneTasksTableViewController : UITableViewController<OnAddToProgress>
 
 @end
 

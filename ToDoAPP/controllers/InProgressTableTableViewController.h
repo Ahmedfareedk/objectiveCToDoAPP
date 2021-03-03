@@ -10,7 +10,7 @@
 #import "OnAddToProgress.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface InProgressTableTableViewController : UITableViewController<OnAddToProgress>
+@interface InProgressTableTableViewController : UITableViewController <OnAddToProgress>
 
 @property NSMutableArray<NSDictionary*> *inprog;
 @end
