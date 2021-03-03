@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface InProgressTableTableViewController : UITableViewController<OnAddToProgress>
 
-@property NSMutableArray<Task*> *inprog;
+@property NSMutableArray<NSDictionary*> *inprog;
 @end
 
 NS_ASSUME_NONNULL_END
