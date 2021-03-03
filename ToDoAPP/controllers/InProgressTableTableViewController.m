@@ -18,14 +18,22 @@
 @implementation InProgressTableTableViewController
 {
   
-   
+    NSUserDefaults *inProgPreferences;
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     printf("\nDid Load");
-    _inprog = [NSMutableArray new];
+   
+    inProgPreferences = [NSUserDefaults standardUserDefaults];
+    
+    
+   if([inProgPreferences arrayForKey:@"inProgTasks"]){
+        _inprog = [[inProgPreferences objectForKey:@"inProgTasks"]mutableCopy];
+    }else
+        _inprog = [NSMutableArray new];
+    
    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveModel:) name:@"sharingTheModel" object:nil];
     
@@ -51,40 +59,57 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"progress" forIndexPath:indexPath];
 
-    cell.progressTitle.text = [[_inprog objectAtIndex:indexPath.row]taskTitle];
-    cell.progressDesc.text = [[_inprog objectAtIndex:indexPath.row]taskDesc];
-    cell.progressDate.text = [[_inprog objectAtIndex:indexPath.row]taskDate];
+    
+    
+    cell.progressTitle.text = [[_inprog objectAtIndex:indexPath.row]objectForKey:@"title"];
+    cell.progressDesc.text = [[_inprog objectAtIndex:indexPath.row]objectForKey:@"desc"];
+    cell.progressDate.text = [[_inprog objectAtIndex:indexPath.row]objectForKey:@"date"];
    
+    
     [cell setPassTask:self];
     [cell setIndexPath:indexPath];
     
     
-    NSString *periorityValue =[[_inprog objectAtIndex:indexPath.row]taskPeriority] ;
+    NSString *periorityValue =[[_inprog objectAtIndex:indexPath.row]objectForKey:@"periority"] ;
     
     [ColorUtilViewController setCellColor:periorityValue cell:cell];
     return cell;
 }
 
--(void) recieveModel:(NSNotification*)notification{
-    if(notification.userInfo != NULL){
-    NSDictionary *taskDict = notification.userInfo;
-    [_inprog addObject:[taskDict objectForKey:@"task"]];
-    }
-}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 120;
+    return 140;
 }
 
 -(void)passTaskIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *taskDict = [NSDictionary dictionaryWithObject:[_inprog objectAtIndex:indexPath.row] forKey:@"done_task"];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"addToDone" object:nil userInfo:taskDict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"addToDone" object:nil userInfo:[_inprog objectAtIndex:indexPath.row]];
     
-    [_inprog removeObject:[_inprog objectAtIndex:indexPath.row]];
+    [_inprog removeObjectAtIndex:indexPath.row];
+    
+    [inProgPreferences setObject:_inprog forKey:@"inProgTasks"];
+    [inProgPreferences synchronize];
     [self.tableView reloadData];
 
     [AlertsUtilViewController showToast:@"Added To in Done" viewController:self];
+}
+
+
+-(void) recieveModel:(NSNotification*)notification{
+    
+    NSDictionary *taskDict = notification.userInfo;
+        NSDictionary *keyValueDict = @{
+            @"title": [taskDict objectForKey:@"title"]
+            ,@"desc": [taskDict objectForKey:@"desc"]
+            ,@"date":[taskDict objectForKey:@"date"]
+            ,@"periority" : [taskDict objectForKey:@"periority"]
+        };
+        
+    [_inprog addObject:keyValueDict];
+        [inProgPreferences setObject:_inprog forKey:@"inProgTasks"];
+        [inProgPreferences synchronize];
+    
 }
 /*
 // Override to support conditional editing of the table view.

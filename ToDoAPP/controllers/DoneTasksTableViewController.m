@@ -15,11 +15,18 @@
 
 @implementation DoneTasksTableViewController
 {
-    NSMutableArray<Task*> *doneTasks;
+    NSMutableArray<NSDictionary*> *doneTasks;
+    NSUserDefaults *doneTaskPreferences;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    doneTaskPreferences = [NSUserDefaults standardUserDefaults];
+    
+    if([doneTaskPreferences arrayForKey:@"doneTasksPref"]){
+        doneTasks = [[doneTaskPreferences objectForKey:@"doneTasksPref"]mutableCopy];
+    }else
     doneTasks = [NSMutableArray new];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveDoneTasks:) name:@"addToDone" object:nil];
@@ -28,11 +35,19 @@
 }
 
 -(void) recieveDoneTasks : (NSNotification*)notification{
-    if(notification.userInfo != NULL)
-    {
-        NSDictionary* taskDict = notification.userInfo;
-        [doneTasks addObject:[taskDict objectForKey:@"done_task"]];
-    }
+ 
+     NSDictionary* taskDict = notification.userInfo;
+    NSDictionary *keyValueDoneTasks = @{
+        @"title" : [taskDict objectForKey:@"title"]
+        ,@"desc" : [taskDict objectForKey:@"desc"]
+        ,@"date" : [taskDict objectForKey:@"date"]
+        ,@"periority" : [taskDict objectForKey:@"periority"]
+    };
+     [doneTasks addObject:keyValueDoneTasks];
+    [doneTaskPreferences setObject:doneTasks forKey:@"doneTasksPref"];
+    [doneTaskPreferences synchronize];
+    
+    
 }
 
 #pragma mark - Table view data source
@@ -49,14 +64,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"done" forIndexPath:indexPath];
     
-   cell.doneTaskTitle.text =[[doneTasks objectAtIndex:indexPath.row]taskTitle];
-    cell.doneTaskDesc.text =[[doneTasks objectAtIndex:indexPath.row]taskDesc];
-    cell.doneTaskDate.text =[[doneTasks objectAtIndex:indexPath.row]taskDate];
-
-    NSString *periorityValue =[[doneTasks objectAtIndex:indexPath.row]taskPeriority];
+    cell.doneTaskTitle.text = [[doneTasks objectAtIndex:indexPath.row]objectForKey:@"title"];
+    cell.doneTaskDesc.text = [[doneTasks objectAtIndex:indexPath.row]objectForKey:@"desc"];
+    cell.doneTaskDate.text = [[doneTasks objectAtIndex:indexPath.row]objectForKey:@"date"];
     
+    NSString *periorityValue =[[doneTasks objectAtIndex:indexPath.row]objectForKey:@"periority"] ;
     
     [ColorUtilViewController setCellColor:periorityValue cell:cell];
+    
     
     return cell;
 }
@@ -66,8 +81,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    
-    NSLog(@"done size %ld", (long)doneTasks.count);
     
     [self.tableView reloadData];
 }
@@ -79,17 +92,23 @@
 }
 */
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [doneTasks removeObjectAtIndex:indexPath.row];
+        [doneTaskPreferences setObject:doneTasks forKey:@"doneTasksPref"];
+        [doneTaskPreferences synchronize];
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+       
+        
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.

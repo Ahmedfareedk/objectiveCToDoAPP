@@ -21,12 +21,20 @@
 {
     
     NSMutableArray<Task*> *tasks;
+    NSMutableArray<NSDictionary*> *tasksDictArray;
+    NSUserDefaults *taskPrefernces;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    taskPrefernces = [NSUserDefaults standardUserDefaults];
     tasks = [[NSMutableArray alloc] init];
+    
+   if([taskPrefernces arrayForKey:@"taskDictPref"]){
+        tasksDictArray = [[taskPrefernces objectForKey:@"taskDictPref"]mutableCopy];
+    }else
+    tasksDictArray = [NSMutableArray new];
+    
 
     UIBarButtonItem *addBtn = [[UIBarButtonItem alloc]initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(add)];
     [self.navigationItem setRightBarButtonItem:addBtn];
@@ -41,12 +49,14 @@
     [taskCell setPassTask:self];
     [taskCell setIndexPath:indexPath];
     
-    taskCell.taskTitle.text = [[tasks objectAtIndex:indexPath.row]taskTitle];
-    taskCell.taskDescription.text = [[tasks objectAtIndex:indexPath.row]taskDesc];
-    taskCell.taskDate.text = [[tasks objectAtIndex:indexPath.row]taskDate];
+    taskCell.taskTitle.text = [[tasksDictArray objectAtIndex:indexPath.row]objectForKey:@"title"];
+    taskCell.taskDescription.text = [[tasksDictArray objectAtIndex:indexPath.row]objectForKey:@"desc"];
     
-    NSString *periorityValue =[[tasks objectAtIndex:indexPath.row]taskPeriority] ;
-    [ColorUtilViewController setCellColor:periorityValue cell:taskCell];
+    taskCell.taskDate.text = [[tasksDictArray objectAtIndex:indexPath.row]objectForKey:@"date"];
+
+    NSString *periorityValue =[[tasksDictArray objectAtIndex:indexPath.row]objectForKey:@"periority"];
+    
+   [ColorUtilViewController setCellColor:periorityValue cell:taskCell];
     
     return taskCell;
 }
@@ -57,7 +67,7 @@
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return tasks.count;
+    return [tasksDictArray count];
 }
 
 
@@ -68,7 +78,18 @@
 
 
 - (void)OnAddTask:(Task *)task{
-    [tasks addObject:task];
+    
+    NSDictionary *taskDictionary = @{
+        @"title" : task.taskTitle,
+        @"desc" : task.taskDesc,
+        @"date" : task.taskDate,
+        @"periority" : task.taskPeriority
+    };
+    
+    [tasksDictArray addObject:taskDictionary];
+    
+   [taskPrefernces setObject:tasksDictArray forKey:@"taskDictPref"];
+   [taskPrefernces synchronize];
 }
 
 -(void) add{
@@ -81,17 +102,19 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    printf("\nWill appear");
     [_tableView reloadData];
 }
 
 //Implement The Add to progress Protocol Methods
 - (void)passTaskIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *taskDict = [NSDictionary dictionaryWithObject:[tasks objectAtIndex:indexPath.row] forKey:@"task"];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"sharingTheModel" object:nil userInfo:taskDict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"sharingTheModel" object:nil userInfo:[tasksDictArray objectAtIndex:indexPath.row]];
     
-    [tasks removeObject:[tasks objectAtIndex:indexPath.row]];
+    [tasksDictArray removeObjectAtIndex:indexPath.row];
+    
+
+    [taskPrefernces setObject:tasksDictArray forKey:@"taskDictPref"];
+    [taskPrefernces synchronize];
     [_tableView reloadData];
 
     [AlertsUtilViewController showToast:@"Added To in Progress" viewController:self];

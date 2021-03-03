@@ -51,9 +51,9 @@
 -(void)done{
     if([_taskTitle hasText] && [_taskDesc hasText]){
     Task *task = [[Task alloc]initWithAttributes:_taskTitle.text description:_taskDesc.text periority:_periorityValue date:_date.text];
+        
+        [_onTaskDone OnAddTask:task];
     [self.navigationController popViewControllerAnimated:YES];
-    
-    [_onTaskDone OnAddTask:task];
     }else{
         
         [self showToast];
