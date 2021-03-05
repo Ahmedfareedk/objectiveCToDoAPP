@@ -20,6 +20,7 @@
 {
   
     NSUserDefaults *inProgPreferences;
+    NSMutableArray<NSDictionary*> *filteredInProgTasks;
 }
 
 
@@ -36,6 +37,8 @@
         _inprog = [NSMutableArray new];
     
    
+    filteredInProgTasks = [inProgPreferences objectForKey:@"inProgTasks"];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveModel:) name:@"sharingTheModel" object:nil];
     
 }
@@ -124,6 +127,8 @@
         [inProgPreferences setObject:_inprog forKey:@"inProgTasks"];
         [inProgPreferences synchronize];
     
+    filteredInProgTasks = [inProgPreferences objectForKey:@"inProgTasks"];
+    
 }
 
 - (void)onAddTaskDict:(NSDictionary *)taskDict indexPath:(NSIndexPath *)indexPath{
@@ -131,6 +136,29 @@
     [_inprog replaceObjectAtIndex:indexPath.row withObject:taskDict];
     [inProgPreferences setObject:_inprog forKey:@"inProgTasks"];
     [inProgPreferences synchronize];
+    [self.tableView reloadData];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    
+    if(searchText.length == 0)
+    {
+        [_inprog removeAllObjects];
+        [_inprog addObjectsFromArray:filteredInProgTasks];
+    }else{
+        [_inprog removeAllObjects];
+        int i = 0;
+        for(NSDictionary *query in filteredInProgTasks){
+            NSString *stringQuery = [query objectForKey:@"title"];
+            
+            NSRange searchRange = [stringQuery rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            if(searchRange.location != NSNotFound){
+                [_inprog addObject:query];
+            }
+            i++;
+        }
+    }
+
     [self.tableView reloadData];
 }
 

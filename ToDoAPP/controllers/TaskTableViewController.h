@@ -13,13 +13,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-@interface TaskTableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, TaskProtocol, OnAddToProgress>{
+@interface TaskTableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, TaskProtocol, OnAddToProgress, UISearchBarDelegate>{
     
 }
 
 //@property (weak, nonatomic) NSMutableArray<NSDictionary*> *tasksDictArray;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 
 @end
 

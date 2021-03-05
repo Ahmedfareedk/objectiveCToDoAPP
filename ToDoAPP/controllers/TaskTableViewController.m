@@ -22,20 +22,26 @@
 {
     
     NSMutableArray<Task*> *tasks;
+    NSMutableArray<NSDictionary*> *filteredTasks;
     NSMutableArray<NSDictionary*> *tasksDictArray;
     NSUserDefaults *taskPrefernces;
+    BOOL isFiltered;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     taskPrefernces = [NSUserDefaults standardUserDefaults];
     tasks = [[NSMutableArray alloc] init];
+  
+    
+    filteredTasks = [[NSMutableArray alloc]initWithArray:tasksDictArray];
     
    if([taskPrefernces arrayForKey:@"taskDictPref"]){
         tasksDictArray = [[taskPrefernces objectForKey:@"taskDictPref"]mutableCopy];
     }else
     tasksDictArray = [NSMutableArray new];
     
+    filteredTasks = [taskPrefernces objectForKey:@"taskDictPref"];
 
     UIBarButtonItem *addBtn = [[UIBarButtonItem alloc]initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(add)];
     [self.navigationItem setRightBarButtonItem:addBtn];
@@ -49,6 +55,7 @@
    
     [taskCell setPassTask:self];
     [taskCell setIndexPath:indexPath];
+
     
     taskCell.taskTitle.text = [[tasksDictArray objectAtIndex:indexPath.row]objectForKey:@"title"];
     taskCell.taskDescription.text = [[tasksDictArray objectAtIndex:indexPath.row]objectForKey:@"desc"];
@@ -56,8 +63,9 @@
     taskCell.taskDate.text = [[tasksDictArray objectAtIndex:indexPath.row]objectForKey:@"date"];
 
     NSString *periorityValue =[[tasksDictArray objectAtIndex:indexPath.row]objectForKey:@"periority"];
-    
-   [ColorUtilViewController setCellColor:periorityValue cell:taskCell];
+        [ColorUtilViewController setCellColor:periorityValue cell:taskCell];
+        
+   
     
     return taskCell;
 }
@@ -103,6 +111,7 @@
     
    [taskPrefernces setObject:tasksDictArray forKey:@"taskDictPref"];
    [taskPrefernces synchronize];
+    filteredTasks = [taskPrefernces objectForKey:@"taskDictPref"];
 }
 
 -(void) add{
@@ -143,5 +152,28 @@
     [_tableView reloadData];
 }
 
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    
+    if(searchText.length == 0)
+    {
+        [tasksDictArray removeAllObjects];
+        [tasksDictArray addObjectsFromArray:filteredTasks];
+    }else{
+        [tasksDictArray removeAllObjects];
+        int i = 0;
+        for(NSDictionary *query in filteredTasks){
+            NSString *stringQuery = [query objectForKey:@"title"];
+            
+            NSRange searchRange = [stringQuery rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            if(searchRange.location != NSNotFound){
+                [tasksDictArray addObject:query];
+            }
+            i++;
+        }
+    }
+
+    [_tableView reloadData];
+}
 
 @end

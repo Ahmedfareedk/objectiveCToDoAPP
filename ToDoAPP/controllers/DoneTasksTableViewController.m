@@ -17,6 +17,7 @@
 @implementation DoneTasksTableViewController
 {
     NSMutableArray<NSDictionary*> *doneTasks;
+    NSMutableArray<NSDictionary*> *filteredDoneTasks;
     NSUserDefaults *doneTaskPreferences;
 }
 
@@ -29,6 +30,9 @@
         doneTasks = [[doneTaskPreferences objectForKey:@"doneTasksPref"]mutableCopy];
     }else
     doneTasks = [NSMutableArray new];
+    
+    
+    filteredDoneTasks = [doneTaskPreferences objectForKey:@"doneTasksPref"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveDoneTasks:) name:@"addToDone" object:nil];
     
@@ -48,7 +52,7 @@
     [doneTaskPreferences setObject:doneTasks forKey:@"doneTasksPref"];
     [doneTaskPreferences synchronize];
     
-    
+    filteredDoneTasks = [doneTaskPreferences objectForKey:@"doneTasksPref"];
 }
 
 #pragma mark - Table view data source
@@ -132,6 +136,28 @@
     [self.tableView reloadData];
 }
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    
+    if(searchText.length == 0)
+    {
+        [doneTasks removeAllObjects];
+        [doneTasks addObjectsFromArray:filteredDoneTasks];
+    }else{
+        [doneTasks removeAllObjects];
+        
+        for(NSDictionary *query in filteredDoneTasks){
+            NSString *stringQuery = [query objectForKey:@"title"];
+            
+            NSRange searchRange = [stringQuery rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            if(searchRange.location != NSNotFound){
+                [doneTasks addObject:query];
+            }
+   
+        }
+    }
+
+    [self.tableView reloadData];
+}
 /*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {

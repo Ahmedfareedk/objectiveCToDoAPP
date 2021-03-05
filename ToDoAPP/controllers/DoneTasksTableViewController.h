@@ -9,7 +9,7 @@
 #import "onAddToProgress.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DoneTasksTableViewController : UITableViewController<OnAddToProgress>
+@interface DoneTasksTableViewController : UITableViewController<OnAddToProgress, UISearchBarDelegate>
 
 @end
 
