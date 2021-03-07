@@ -14,8 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic) NSString *taskDesc;
 @property(nonatomic) NSString *taskPeriority;
 @property(nonatomic) NSString *taskDate;
+@property(weak,nonatomic)NSDate *deadline;
+@property(nonatomic)BOOL remindMe;
 
--(id)initWithAttributes :(NSString*)title description :(NSString*) description periority :(NSString*) periority date :(NSString*) date;
+-(id)initWithAttributes :(NSString*)title description :(NSString*) description periority :(NSString*) periority date :(NSString*) date deadline :(NSDate*) deadline  remindMe :(BOOL)remindMe;
+
 
 @end
 

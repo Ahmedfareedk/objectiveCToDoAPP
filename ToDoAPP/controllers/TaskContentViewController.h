@@ -7,9 +7,12 @@
 
 #import <UIKit/UIKit.h>
 #import "TaskProtocol.h"
+#import <UserNotifications/UserNotifications.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TaskContentViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
+@property (strong, nonatomic) IBOutlet UIDatePicker *deadlineDatePicker;
+@property (strong, nonatomic) IBOutlet UIButton *notifyMeBtnCheck;
 
 @property id <TaskProtocol>onTaskDone;
 

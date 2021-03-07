@@ -60,7 +60,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHK-Yg-c7z">
-                                            <rect key="frame" x="276" y="108" width="126" height="21"/>
+                                            <rect key="frame" x="202" y="108" width="200" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -86,7 +86,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="apB-Vt-kVd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="284.05797101449275" y="67.633928571428569"/>
+            <point key="canvasLocation" x="282.60869565217394" y="67.633928571428569"/>
         </scene>
         <!--Content Edit View Controller-->
         <scene sceneID="KDp-Sy-hDH">
@@ -191,11 +191,38 @@
                                     <action selector="doneEdit:" destination="19J-M7-igO" eventType="touchUpInside" id="ID4-7Z-kxa"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Deadline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qf-7Q-NAb">
+                                <rect key="frame" x="15" y="620" width="79" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="vz1-F0-Rp8">
+                                <rect key="frame" x="160" y="598" width="212" height="69"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nje-dS-5zo">
+                                <rect key="frame" x="70" y="716" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="remindMe:" destination="19J-M7-igO" eventType="touchUpInside" id="9aO-dF-gvb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Remind me with deadline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gE2-zg-kjP">
+                                <rect key="frame" x="142" y="703" width="247" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="e10-aH-qzJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="editDatePicker" destination="vz1-F0-Rp8" id="l2P-6h-aCT"/>
                         <outlet property="editTaskDateLabel" destination="zyz-0x-BNw" id="3Hs-Ug-d6z"/>
                         <outlet property="editTaskDesc" destination="qjl-el-Ydx" id="Yf8-jb-52z"/>
                         <outlet property="editTaskDescLabel" destination="yhn-hJ-Amd" id="Uhx-Up-5uz"/>
@@ -203,6 +230,7 @@
                         <outlet property="editTaskPeriorityPicker" destination="eDf-k1-FGy" id="B5o-HK-JCL"/>
                         <outlet property="editTaskTitle" destination="I0t-bW-lSD" id="NBn-CH-MHb"/>
                         <outlet property="editTaskTitleLabel" destination="i77-1W-1yR" id="CrC-13-s0a"/>
+                        <outlet property="remindMeBtn" destination="nje-dS-5zo" id="LJC-NP-KU9"/>
                         <outlet property="taskDescBase" destination="9zi-m5-p0b" id="dtk-ie-Bly"/>
                         <outlet property="taskTitleBase" destination="qfb-NG-jQw" id="zZj-EU-ena"/>
                     </connections>
@@ -250,7 +278,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlh-c9-TrJ">
                                 <rect key="frame" x="147" y="470" width="247" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="16"/>
                                 <color key="textColor" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -261,10 +289,36 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZiK-E8-IXn">
-                                <rect key="frame" x="37" y="487" width="43" height="24"/>
+                                <rect key="frame" x="20" y="487" width="43" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Deadline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7B-xd-vWE">
+                                <rect key="frame" x="20" y="616" width="79" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="49e-Rx-bGw">
+                                <rect key="frame" x="165" y="594" width="212" height="69"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69J-6S-TeS">
+                                <rect key="frame" x="75" y="712" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="notifyMe:" destination="MkF-pq-Zgz" eventType="touchUpInside" id="xme-YF-ANk"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Remind me with deadline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EyS-xL-8z4">
+                                <rect key="frame" x="147" y="699" width="247" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -275,6 +329,8 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="date" destination="jlh-c9-TrJ" id="uh4-UW-hfg"/>
+                        <outlet property="deadlineDatePicker" destination="49e-Rx-bGw" id="KVy-rr-fIV"/>
+                        <outlet property="notifyMeBtnCheck" destination="69J-6S-TeS" id="z9a-c4-9ku"/>
                         <outlet property="periorityPicker" destination="XNC-XQ-9Rw" id="JgT-i1-de4"/>
                         <outlet property="taskDesc" destination="scl-GT-ltv" id="uz3-g7-Q3Y"/>
                         <outlet property="taskTitle" destination="6OZ-u5-HqY" id="hox-mf-QZa"/>
@@ -319,7 +375,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wh-9t-92q">
-                                                    <rect key="frame" x="273" y="104" width="127" height="22"/>
+                                                    <rect key="frame" x="200" y="104" width="200" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" systemColor="systemGray5Color"/>
@@ -340,10 +396,16 @@
                                                         <action selector="addToInProgress:" destination="PK9-h6-xiA" eventType="touchUpInside" id="q5n-FI-u5N"/>
                                                     </connections>
                                                 </button>
+                                                <imageView autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="alarm" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="CDa-T1-Yyr">
+                                                    <rect key="frame" x="343" y="66" width="21" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="alarmImg" destination="CDa-T1-Yyr" id="L8f-Pk-aHr"/>
                                             <outlet property="inProgressBtn" destination="bXj-ze-z4B" id="N77-k3-iWR"/>
                                             <outlet property="taskDate" destination="5Wh-9t-92q" id="Weq-DN-SlR"/>
                                             <outlet property="taskDescription" destination="MyL-Tq-YDv" id="7PE-Vb-mBR"/>
@@ -377,7 +439,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="01f-dU-9Tb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="283" y="-599"/>
+            <point key="canvasLocation" x="282.60869565217394" y="-599.33035714285711"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="JBl-Wy-AmP">
@@ -437,7 +499,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZA-XD-jLF">
-                                            <rect key="frame" x="275" y="93" width="127" height="29"/>
+                                            <rect key="frame" x="203" y="93" width="199" height="29"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -462,7 +524,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jsc-qq-1Lf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="284.05797101449275" y="731.91964285714278"/>
+            <point key="canvasLocation" x="282.60869565217394" y="731.91964285714278"/>
         </scene>
         <!--To Do-->
         <scene sceneID="vE2-Ee-Pjt">
@@ -523,6 +585,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="alarm" catalog="system" width="124" height="128"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="hands.clap.fill" catalog="system" width="128" height="113"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>

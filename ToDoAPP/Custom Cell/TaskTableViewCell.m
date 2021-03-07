@@ -13,6 +13,7 @@
     [super awakeFromNib];
     // Initialization code
     
+    [_alarmImg setHidden:YES];
     _inProgressBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 4, 0, 4);
     _addToDoneBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 4, 0, 4);
   

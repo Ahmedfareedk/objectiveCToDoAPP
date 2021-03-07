@@ -9,6 +9,7 @@
 #import "Task.h"
 #import "TaskProtocol.h"
 #import "onAddToProgress.h"
+@import UserNotifications;
 
 NS_ASSUME_NONNULL_BEGIN
 

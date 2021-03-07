@@ -14,14 +14,31 @@
 
 @implementation ContentEditViewController{
     NSArray *periorities;
+   
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _isReminded = [_taskDict objectForKey:@"remind_me"];
+  
+   
+    UIImage *checked =  [UIImage imageNamed:@"checked"];
+    UIImage *unchecked =  [UIImage imageNamed:@"unchecked"];
+
+    
+    [_remindMeBtn setImage:checked forState:UIControlStateSelected];
+    [_remindMeBtn setImage:unchecked forState:UIControlStateNormal];
+   
+    if([_taskDict objectForKey:@"remind_me"]){
+        [_remindMeBtn setSelected:NO];
+    }else
+        [_remindMeBtn setSelected:YES];
+
+    
     periorities = @[@"High", @"Medium", @"Low"];
     [self.editTaskPeriorityPicker selectRow:1 inComponent:0 animated:YES];
-    _periorityValue = @"Medium";
+    _periorityValue = [_taskDict objectForKey:@"periority"];
     
     [self showHideComp:NO];
     [self fillLables];
@@ -93,26 +110,16 @@ _editTaskDesc.text = [_taskDict objectForKey:@"desc"];
 }
 
 - (IBAction)doneEdit:(id)sender  {
-//    NSDictionary *editedTask = @{
-//        @"title" : [_taskDict objectForKey:@"title"]
-//        ,@"desc" : [_taskDict objectForKey:@"desc"]
-//        ,@"periority" : [_taskDict objectForKey:@"periority"]
-//        ,@"dare" : [_taskDict objectForKey:@"date"]
-//    };
-    
     NSDictionary *editedTask = @{
         @"title" : _editTaskTitle.text
         ,@"desc" : _editTaskDesc.text
         ,@"periority" :_periorityValue
         ,@"date" : _editTaskDateLabel.text
-       
+        ,@"remind_me":@(_isReminded)
     };
-//    [_taskDict setValue:_editTaskTitle.text forKey:@"title"];
-//    [_taskDict setValue:_editTaskDesc.text forKey:@"desc"];
-//    [_taskDict setValue:_editTaskDate.text forKey:@"date"];
-//    [_taskDict setValue:_periorityValue forKey:@"periority"];
-    
+
     [_passTaskDict onAddTaskDict:editedTask indexPath:_indexPath];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 @end

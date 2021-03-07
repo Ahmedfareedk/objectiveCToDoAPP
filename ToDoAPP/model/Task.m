@@ -9,7 +9,7 @@
 
 @implementation Task
 
--(id)initWithAttributes :(NSString*)title description :(NSString*) description periority :(NSString*) periority date :(NSString*) date{
+-(id)initWithAttributes :(NSString*)title description :(NSString*) description periority :(NSString*) periority date :(NSString*) date deadline :(NSDate*) deadline  remindMe :(BOOL)remindMe{
     
     self = [super init];
     if (self) {
@@ -17,6 +17,8 @@
         self.taskDesc = description;
         self.taskPeriority = periority;
         self.taskDate = date;
+        self.deadline = deadline;
+        self.remindMe =remindMe;
     }
 
     return self;

@@ -14,7 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ContentEditViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource>
 @property id <TaskProtocol> passTaskDict;
 
+@property (weak, nonatomic) IBOutlet UIDatePicker *editDatePicker;
 
+@property (weak, nonatomic) IBOutlet UIButton *remindMeBtn;
 @property (weak, nonatomic) IBOutlet UITextField *editTaskTitle;
 @property (weak, nonatomic) IBOutlet UITextField *editTaskDesc;
 @property (weak, nonatomic) IBOutlet UIPickerView *editTaskPeriorityPicker;
@@ -22,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *editTaskDescLabel;
 @property (weak, nonatomic) IBOutlet UILabel *editTaskPeriorityLabel;
 @property (weak, nonatomic) IBOutlet UILabel *editTaskDateLabel;
+@property BOOL  isReminded;
 
 @property (weak, nonatomic) IBOutlet UILabel *taskTitleBase;
 @property (weak, nonatomic) IBOutlet UILabel *taskDescBase;

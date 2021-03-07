@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *inProgressBtn;
 @property id <OnAddToProgress> passTask;
 @property NSIndexPath* indexPath;
+@property (weak, nonatomic) IBOutlet UIImageView *alarmImg;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *taskTitle;

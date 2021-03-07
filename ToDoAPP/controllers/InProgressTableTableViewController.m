@@ -39,13 +39,16 @@
    
     filteredInProgTasks = [inProgPreferences objectForKey:@"inProgTasks"];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveModel:) name:@"sharingTheModel" object:nil];
+  
     
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [self.tableView reloadData];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveModel:) name:@"sharingTheModel" object:nil];
+
 }
+
 
 #pragma mark - Table view data source
 
@@ -124,9 +127,8 @@
         };
         
     [_inprog addObject:keyValueDict];
-        [inProgPreferences setObject:_inprog forKey:@"inProgTasks"];
-        [inProgPreferences synchronize];
-    
+    [inProgPreferences setObject:_inprog forKey:@"inProgTasks"];
+    [inProgPreferences synchronize];
     filteredInProgTasks = [inProgPreferences objectForKey:@"inProgTasks"];
     
 }

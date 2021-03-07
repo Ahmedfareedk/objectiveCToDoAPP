@@ -21,18 +21,26 @@
 @implementation TaskTableViewController
 {
     
-    NSMutableArray<Task*> *tasks;
+
     NSMutableArray<NSDictionary*> *filteredTasks;
     NSMutableArray<NSDictionary*> *tasksDictArray;
     NSUserDefaults *taskPrefernces;
-    BOOL isFiltered;
+    NSDate *deadlineDate;
+    BOOL isGranted;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     taskPrefernces = [NSUserDefaults standardUserDefaults];
-    tasks = [[NSMutableArray alloc] init];
+    
+    
+    isGranted = false;
   
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    UNAuthorizationOptions options = UNAuthorizationOptionAlert + UNAuthorizationOptionSound;
+    [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        self->isGranted = granted;
+    }];
     
     filteredTasks = [[NSMutableArray alloc]initWithArray:tasksDictArray];
     
@@ -64,6 +72,10 @@
 
     NSString *periorityValue =[[tasksDictArray objectAtIndex:indexPath.row]objectForKey:@"periority"];
         [ColorUtilViewController setCellColor:periorityValue cell:taskCell];
+    
+    if([[tasksDictArray objectAtIndex:indexPath.row]objectForKey:@"remind_me"]){
+        [taskCell.alarmImg setHidden:NO];
+    }
         
    
     
@@ -100,15 +112,24 @@
 
 - (void)OnAddTask:(Task *)task{
     
+    deadlineDate = task.deadline;
+    
     NSDictionary *taskDictionary = @{
         @"title" : task.taskTitle,
         @"desc" : task.taskDesc,
         @"date" : task.taskDate,
-        @"periority" : task.taskPeriority
+        @"periority" : task.taskPeriority,
+        @"deadline": task.deadline,
+        @"remind_me": @(task.remindMe)
     };
     
     [tasksDictArray addObject:taskDictionary];
     
+    if ([taskDictionary valueForKey:@"remind_me"]) {
+        [self requestNotification:task.taskTitle desription:task.taskDesc];
+        
+    }
+ 
    [taskPrefernces setObject:tasksDictArray forKey:@"taskDictPref"];
    [taskPrefernces synchronize];
     filteredTasks = [taskPrefernces objectForKey:@"taskDictPref"];
@@ -145,7 +166,7 @@
 
 
 - (void)onAddTaskDict:(NSDictionary *)taskDict indexPath:(NSIndexPath *)indexPath{
-    printf("Doooooone");
+   
     [tasksDictArray replaceObjectAtIndex:indexPath.row withObject:taskDict];
     [taskPrefernces setObject:tasksDictArray forKey:@"taskDictPref"];
     [taskPrefernces synchronize];
@@ -161,7 +182,6 @@
         [tasksDictArray addObjectsFromArray:filteredTasks];
     }else{
         [tasksDictArray removeAllObjects];
-        int i = 0;
         for(NSDictionary *query in filteredTasks){
             NSString *stringQuery = [query objectForKey:@"title"];
             
@@ -169,11 +189,35 @@
             if(searchRange.location != NSNotFound){
                 [tasksDictArray addObject:query];
             }
-            i++;
+          
         }
     }
 
     [_tableView reloadData];
 }
 
+-(void)requestNotification:(NSString*)title  desription :(NSString*) description{
+    if(isGranted){
+    UNUserNotificationCenter *notificationCenter = [UNUserNotificationCenter currentNotificationCenter];
+    UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc]init];
+    
+    content.title = [NSString stringWithFormat:@"%@ Task Deadline!",title];
+    content.body = description;
+    
+    content.sound = [UNNotificationSound defaultSound];
+        
+        NSDateComponents *detailedDate = [[NSCalendar currentCalendar]
+                             components:NSCalendarUnitYear +
+                             NSCalendarUnitMonth + NSCalendarUnitDay +
+                             NSCalendarUnitHour + NSCalendarUnitMinute +
+                             NSCalendarUnitSecond fromDate:deadlineDate];
+    
+    
+        UNCalendarNotificationTrigger *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:detailedDate repeats:NO];
+    
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:title content:content trigger:trigger];
+    
+    [notificationCenter addNotificationRequest:request withCompletionHandler:nil];
+   }
+}
 @end
